@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=details.type%> Puzzles</title>
+    <link rel="stylesheet" type="text/css" href="./css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="./css/small.css" />
+  </head>
+  <body>
+    <h1><%=details.type%></h1>
+    <div>
+        <% images.forEach(image => {%>
+            <a href="pieceSelection?type=<%=details.type%>&image=<%= image.split('.')[0] %> " >
+                <img src="./assets/<%=details.type%>/<%=image%>">
+            </a>
+        <% }) %>
+    </div>
+  </body>
+</html>
