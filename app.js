@@ -40,17 +40,17 @@ app.get("/puzzleHome", (req, res) => {
 // code for puzzleselector.ejs
 app.get("/puzzleSelector", (req, res) => {
   let query = url.parse(req.url, true).query
-  let fileList = []
+  // let fileList = []
 
   // send out a list of images to append to html
-  fs.readdir(__dirname+'/public/assets/'+query.type, function (err, files) {
-    console.log('total files: ', files.length)
-    files.forEach(file => {
-      console.log('looking at file: ', __dirname+'public/assets/'+file)
-      fileList.push(file)
-    })
-    res.render('puzzleSelector', {details:query, images:fileList})
-  })
+  // fs.readdir(__dirname+'/public/assets/'+query.type, function (err, files) {
+  //   console.log('total files: ', files.length)
+  //   files.forEach(file => {
+  //     console.log('looking at file: ', __dirname+'public/assets/'+file)
+  //     fileList.push(file)
+  //   })
+    res.render('puzzleSelector', {details:query})
+  // })
 })
 
 // code for puzzleselector.ejs

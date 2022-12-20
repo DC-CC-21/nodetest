@@ -5,8 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build <%= details.image %> </title>
+    <script src="js/play.js" defer></script>
+    <style>
+        *{
+            margin: 0;
+            padding:0px;
+            overflow: hidden;
+            touch-action: none;
+            -ms-user-select: none;
+            -webkit-user-select: none ;
+            user-select: none;
+        }
+        #createCanvas{
+            position:fixed;
+            display:none;
+        }
+        #banner{
+            position:fixed;
+            display: flex;
+            flex-direction: column;
+            left:0px;
+            top:0px;
+            padding:10px;
+            background-color: #fffa;
+            font-size:1em;
+        }
+        #minimap{
+            position: fixed;
+            right:5vh;
+            top:5vh;
+            width:20vh;
+            height:20vh;
+            background-size:cover;
+            opacity: 0.5;
+            display:none;
+        }
+    </style>
 </head>
 <body>
-    <h1>stuff here</h1>
+    <div id="banner">
+        <div id="debugger">hello world</div>
+        <label>Edges only <input type="checkbox" id="check"></label>
+        <label>Minimap <input type="checkbox" id="map"></label>
+
+    </div>
+    <p style="display:none" id="details"><%=details.type%>,<%=details.image%>,<%=details.grid%></p>
+    <div id="minimap"></div>
+    <canvas id="canvas"></canvas>
+    <canvas id="createCanvas"></canvas>
 </body>
 </html>

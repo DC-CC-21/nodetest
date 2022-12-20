@@ -9,13 +9,35 @@
     <link rel="stylesheet" type="text/css" href="./css/small.css" />
   </head>
   <body>
-    <h1><%=details.type%></h1>
-    <div>
-        <% images.forEach(image => {%>
-            <a href="pieceSelection?type=<%=details.type%>&image=<%= image.split('.')[0] %> " >
-                <img src="./assets/<%=details.type%>/<%=image%>">
-            </a>
-        <% }) %>
+    <h1 id="details"><%=details.type%></h1>
+    <div id="puzzles">
     </div>
+    <script defer>
+      let main = document.getElementById('puzzles')
+      let type = document.getElementById('details').innerHTML
+      fetch('./assets/puzzles.json') 
+      .then(response => response.json())
+      .then(jsObject => {
+        jsObject[type].forEach(element => {
+          let a = document.createElement('a')
+          a.href = 'pieceSelection?type='+type+'&image='+element
+
+          let div = document.createElement('div')
+          a.append(div)
+
+          let img = document.createElement('img')
+          img.src = './assets/'+type+'/'+element
+          img.alt = element
+          div.append(img)
+          
+          let h2 = document.createElement('h2')
+          h2.innerHTML = element
+          a.append(h2)
+
+          main.append(a);           
+        });
+        }) 
+
+    </script>
   </body>
 </html>

@@ -1,11 +1,21 @@
 {
-    "beach":{
-
-    },
-    "volcanoes":{
+    "Beach":[
+        "Beach1.jpg",
+        "Beach2.jpg"
+    ],
+    "Foods":[
+        "Foods1.jpg",
+        "Foods2.jpg"
+    ],
+    "Forests":[
+        "Forests1.jpg"
+    ],
+    "Islands":[
+        "Lighthouse.jpg",
+        "Surfboard.jpg",
+        "Wavve.jpg"
+    ],
+    "Mountains":[
         
-    },
-    "plants":{
-        
-    }
+    ]
 }

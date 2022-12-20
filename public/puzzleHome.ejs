@@ -21,77 +21,6 @@
       <h1>Puzzle Library: Home</h1>
     </header>
     <main>
-      <a href='puzzleSelector?type=Beach'> 
-        <div>
-          <img src='./assets/beach/BeachResized.jpg' alt='Img of a beach' width='300' height='233'>
-        </div>
-        <h2>Beaches</h2>
-      </a>
-      
-      <a href='puzzleSelector?type=Plants'>
-        <div>
-          <img src='./assets/FlowerBground.svg' alt='Img representing the Plants' width='300' height='233'>
-        </div>
-        <h2>Plants</h2>        
-      </a>
-      
-      <a href='puzzleSelector?type=Foods'>
-        <div>
-          <img src='./assets/homeImgs/Coconuts.jpg' alt='Food Img' width='300' height='233'>
-        </div>
-        <h2>Foods</h2>
-      </a>
-
-      <a href='puzzleSelector?type=Forests'>
-        <div>
-          <img src='./assets/homeImgs/ForestResize.jpg' alt='Forest Img' width='300' height='233'>
-        </div>
-        <h2>Forests</h2>
-      </a>
-      
-      <a href='puzzleSelector?type=Islands'>
-        <div>  
-          <img src='./assets/homeImgs/IslandResize.jpg' alt='Img representing the Islands' width='300' height='233'>
-        </div>
-        <h2>Islands</h2>
-      </a>
-
-      <a href='puzzleSelector?type=Mountains'>
-        <div>
-          <img src='./assets/homeImgs/MountainResize.jpg' alt='Img of Mountains' width='300' height='233'>
-        </div>
-        <h2>Mountains</h2>
-      </a>
-
-
-      <a href='puzzleSelector?type=sky'>
-        <div>
-          <img src='./assets/homeImgs/StarrySky.svg' alt='Starry Sky' width='300' height='233'>
-        </div>
-        <h2>Sky</h2>
-      </a>
-
-      <a href='puzzleSelector?type=underwater'>
-        <div>
-          <img src='./assets/homeImgs/Underwater.jpg' alt='Dolphin Img' width='300' height='233'>
-        </div>
-        <h2>Underwater</h2>
-      </a>
-
-      <a href='puzzleSelector?type=Waterfalls'>
-        <div>
-          <img src='./assets/homeImgs/Waterfalls.jpg' alt='Waterfall' width='300' height='233' >
-        </div>
-        <h2>Waterfalls</h2>
-      </a>
-
-      <a href='puzzleSelector?type=Wildlife'>
-        <div>
-          <img src='./assets/homeImgs/Wildlife.jpg' alt='Wildlife Img' width='300' height='233'>
-        </div>
-        <h2>Wildlife</h2>
-      </a>
-
       <a href='#'>
         <div>
           <img src='./assets/homeImgs/resume.jpg' alt='Resume Img' width='300' height='233'>
@@ -111,5 +40,32 @@
       <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
       <span id="lm"></span>
     </footer>
+    <script>
+      let main = document.getElementsByTagName('main')[0]
+      fetch('./assets/puzzles.json') 
+      .then(response => response.json())
+      .then(jsObject => {
+        let before = main.firstChild
+        Object.keys(jsObject).forEach(element => {
+          let a = document.createElement('a')
+          a.href = 'puzzleSelector?type='+element
+
+          let div = document.createElement('div')
+          a.append(div)
+
+          let img = document.createElement('img')
+          img.src = './assets/'+element+'/'+jsObject[element][0]
+          img.alt = element
+          div.append(img)
+          
+          let h2 = document.createElement('h2')
+          h2.innerHTML = element
+          a.append(h2)
+
+          main.insertBefore(a, before);           
+        });
+        }) 
+
+    </script>
   </body>
 </html>
