@@ -1,18 +1,62 @@
 {
-  "Beach": ["Beach1.jpg", "Beach2.jpg"],
-  "Foods": ["Foods1.jpg", "Foods2.jpg"],
-  "Forests": ["Forests1.jpg"],
-  "Islands": ["Lighthouse.jpg", "Surfboard.jpg", "Wave.jpg"],
-  "Mountains": [],
-  "Plants": ["Plants1.jpg", "Plants2.jpg", "Plants3.jpg", "Plants4.jpg"],
-  "Underwater": [],
-  "Waterfalls": [
-    "Waterfalls1.jpg",
-    "Waterfalls2.jpg",
-    "Waterfalls3.jpg",
-    "Waterfalls4.jpg",
-    "Waterfalls5.jpg",
-    "Waterfalls6.jpg"
+  "Beach": ["Beach1Sq.jpg", "Beach2Sq.jpg"],
+  "Foods": [
+    "Foods1Sq.jpg",
+    "Foods2Sq.jpg",
+    "Foods3Sq.jpg",
+    "Foods4Sq.jpg",
+    "Foods5Sq.jpg",
+    "Foods6Sq.jpg",
+    "Foods7Sq.jpg",
+    "Foods8Sq.jpg",
+    "Foods9Sq.jpg",
+    "Foods10Sq.jpg"
   ],
-  "Wildlife": ["Wildlife1.jpg", "Wildlife2.jpg", "Wildlife3.jpg"]
+  "Forests": [
+    "Forests1Sq.jpg",
+    "Forests2Sq.jpg",
+    "Forests3Sq.jpg",
+    "Forests4Sq.jpg",
+    "Forests5Sq.jpg",
+    "Forests6Sq.jpg"
+  ],
+  "Islands": ["LighthouseSq.jpg", "SurfboardSq.jpg", "WaveSq.jpg"],
+  "Mountains": [
+    "mountain1Sq.jpg",
+    "mountain2Sq.jpg",
+    "mountain3Sq.jpg",
+    "mountain4Sq.jpg",
+    "mountain5Sq.jpg",
+    "mountain6Sq.jpg",
+    "mountain7Sq.jpg",
+    "mountain8Sq.jpg",
+    "mountain9Sq.jpg"
+  ],
+  "Ocean": ["Ocean1Sq.jpg", "Ocean2Sq.jpg", "Ocean3Sq.jpg", "Ocean4Sq.jpg"],
+  "Plants": [
+    "Plants1Sq.jpg",
+    "Plants2Sq.jpg",
+    "Plants3Sq.jpg",
+    "Plants4Sq.jpg",
+    "Plants5Sq.jpg"
+  ],
+  "Waterfalls": [
+    "Waterfalls1Sq.jpg",
+    "Waterfalls2Sq.jpg",
+    "Waterfalls3Sq.jpg",
+    "Waterfalls4Sq.jpg",
+    "Waterfalls5Sq.jpg",
+    "Waterfalls6Sq.jpg"
+  ],
+  "Wildlife": [
+    "Wildlife1Sq.jpg",
+    "Wildlife2Sq.jpg",
+    "Wildlife3Sq.jpg",
+    "Wildlife4Sq.jpg",
+    "Wildlife5Sq.jpg",
+    "Wildlife6Sq.jpg",
+    "Wildlife7Sq.jpg",
+    "Wildlife8Sq.jpg",
+    "Wildlife9Sq.jpg"
+  ]
 }
