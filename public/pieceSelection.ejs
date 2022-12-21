@@ -4,44 +4,71 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="./css/small.css" />
+
     <title><%= details.image %> Puzzle</title>
   </head>
   <body>
-    <a href="puzzleSelector?type=<%=details.type%>"><img src="./assets/BackButton.svg" alt="back" width="100px" height="100px" style="width:100px; height:100px;"></a>
-
-    <p style="display: none" id="popup">Please choose a number of pieces.</p>
-    <img src="./assets/<%= details.type %>/<%= details.image %>" width="500px" height="500px" />
-      <label
-        >4<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-      /></label>
-      <label
-        >25<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-      /></label>
-      <label
-        >36<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-      /></label>
-      <label
-        >64<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-      /></label>
-      <label
-        >100<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-      /></label>
-      <p id="details" style="display:none;"><%=details.type%>,<%=details.image%></p>
+    <header>
+      <a href="puzzleSelector?type=<%=details.type%>"
+        ><img
+          src="./assets/BackButton.svg"
+          alt="back"
+          width="100px"
+          height="100px"
+      /></a>
+      <h1 id="pieceH1">Piece Selection</h1>
+    </header>
+    <main id="pieceSel">
+      <p style="display: none" id="popup">Please choose a number of pieces.</p>
+      <img
+        src="./assets/<%= details.type %>/<%= details.image %>"
+        width="500px"
+        height="500px"
+      />
+      <div class="pieceCt">
+        <label
+          >4<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+        <label
+          >25<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+        <label
+          >36<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+        <label
+          >64<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+        <label
+          >100<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+      </div>
+      <p id="details" style="display: none">
+        <%=details.type%>,<%=details.image%>
+      </p>
       <!-- <a id='play' href="/play?type=<%=details.type%>&image=<%=details.image%>">PLAY</a> -->
-        <a id='play' href="/play?type=<%=details.type%>&image=<%=details.image%>">PLAY</a>
+      <a id="play" href="/play?type=<%=details.type%>&image=<%=details.image%>"
+        >PLAY</a
+      >
       <!-- <button type="submit" id="play">Play</button> -->
-
+    </main>
+    <footer>
+      <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
+      <span id="lm"></span>
+    </footer>
     <script>
       let boxes = document.getElementsByName("pieceCount");
-      let a = document.getElementById('play')
-      let details = document.getElementById('details').innerHTML.split(',')
+      let a = document.getElementById("play");
+      let details = document.getElementById("details").innerHTML.replace(/\n+| +/g, '').split(",");
+      console.log(details)
       function unclick(currentBox) {
         boxes.forEach((box) => {
           box.checked = false;
         });
         currentBox.checked = true;
-        let grid = (currentBox.parentElement.innerHTML.split('<')[0])
-        a.href = (`/play?type=${details[0]}&image=${details[1]}&grid=${grid}`)
+        let grid = currentBox.parentElement.innerHTML.split("<")[0];
+        a.href = `/play?type=${details[0]}&image=${details[1]}&grid=${grid}`;
       }
       document.getElementById("play").addEventListener("click", (e) => {
         let boxIsChecked = false;

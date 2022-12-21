@@ -9,36 +9,46 @@
     <link rel="stylesheet" type="text/css" href="./css/small.css" />
   </head>
   <body>
-    <a href="puzzleHome"><img src="./assets/BackButton.svg" alt="back" width="100px" height="100px" style="width:100px; height:100px;"></a>
-    <h1 id="details"><%=details.type%></h1>
-    <div id="puzzles">
-    </div>
+    <header>
+      <a href="puzzleHome"
+        ><img
+          src="./assets/BackButton.svg"
+          alt="back"
+          width="100px"
+          height="100px"
+      /></a>
+      <h1 id="details"><%=details.type%></h1>
+    </header>
+    <main id="puzzles"></main>
+    <footer>
+      <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
+      <span id="lm"></span>
+    </footer>
     <script defer>
-      let main = document.getElementById('puzzles')
-      let type = document.getElementById('details').innerHTML
-      fetch('./assets/puzzles.json') 
-      .then(response => response.json())
-      .then(jsObject => {
-        jsObject[type].forEach(element => {
-          let a = document.createElement('a')
-          a.href = 'pieceSelection?type='+type+'&image='+element
+      let main = document.getElementById("puzzles");
+      let type = document.getElementById("details").innerHTML;
+      fetch("./assets/puzzles.json")
+        .then((response) => response.json())
+        .then((jsObject) => {
+          jsObject[type].forEach((element) => {
+            let a = document.createElement("a");
+            a.href = "pieceSelection?type=" + type + "&image=" + element;
 
-          let div = document.createElement('div')
-          a.append(div)
+            let div = document.createElement("div");
+            a.append(div);
 
-          let img = document.createElement('img')
-          img.src = './assets/'+type+'/'+element
-          img.alt = element
-          div.append(img)
-          
-          // let h2 = document.createElement('h2')
-          // h2.innerHTML = element.split('.')[0]
-          // a.append(h2)
+            let img = document.createElement("img");
+            img.src = "./assets/" + type + "/" + element;
+            img.alt = element;
+            div.append(img);
 
-          main.append(a);           
+            // let h2 = document.createElement('h2')
+            // h2.innerHTML = element.split('.')[0]
+            // a.append(h2)
+
+            main.append(a);
+          });
         });
-        }) 
-
     </script>
   </body>
 </html>

@@ -1,9 +1,9 @@
-*{
+* {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-*{
+* {
   margin: 0;
   padding: 0;
 }
@@ -11,9 +11,10 @@ body {
   background-color: #ffebce;
   text-align: center;
   font-size: 16px;
-  font-family: 'Times New Roman', sans-serif;
+  font-family: "Times New Roman", sans-serif;
 }
-header, footer {
+header,
+footer {
   background-color: #007a54;
   color: #f8f6f1;
   padding: 1em;
@@ -27,7 +28,7 @@ footer {
   text-align: center;
 }
 div {
-  width:  90%;
+  width: 90%;
   margin: 0 auto;
 }
 img {
@@ -51,17 +52,74 @@ nav img {
   border: none;
 }
 /*************************Medium Css**************************************/
-@media only screen and (min-width: 32.5em){
-  #imgContainer, main{
+@media only screen and (min-width: 32.5em) {
+  #imgContainer,
+  main {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  
 }
 /*************************Large Css**************************************/
-@media only screen and (min-width: 64em){
- #imgContainer, main {
+@media only screen and (min-width: 64em) {
+  main:not(#pieceSel) {
     grid-template-columns: 1fr 1fr 1fr;
+    margin: 10em 10em 5em;
   }
-  
+  header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  header:not(#home) {
+    display: grid;
+    grid-template-columns: 75px 1fr 75px;
+  }
+  header a img {
+    border: none;
+    height: 50px;
+    width: auto;
+  }
+  #pieceH1 {
+    padding-top: 0.8em;
+  }
+  #puzzles a img:hover {
+    border: 10px solid gold;
+    box-shadow: 0px 0px 10px 10px gold;
+  }
+  #pieceSel {
+    grid-template-columns: 1fr;
+    margin: 10em 10em 0em;
+  }
+  #pieceSel img {
+    margin: auto;
+    width: 564px;
+  }
+  #pieceSel .pieceCt {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    height: 5em;
+  }
+  .pieceCt input {
+    height: 50px;
+    width: 50px;
+    margin: 2em;
+  }
+  .pieceCt label {
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+    padding-bottom: 0.5em;
+  }
+  #play {
+    background-color: #007a54;
+    color: #f8f6f1;
+    padding: 1.5em;
+    width: 7.5em;
+    margin: 1em auto;
+    border-radius: 10px;
+    box-shadow: 0 0 7px 7px black, 0 0 5px 5px inset #007a54;
+  }
 }
