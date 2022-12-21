@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./css/small.css" />
   </head>
   <body>
+    <a href="puzzleHome"><img src="./assets/BackButton.svg" alt="back" width="100px" height="100px" style="width:100px; height:100px;"></a>
     <h1 id="details"><%=details.type%></h1>
     <div id="puzzles">
     </div>
@@ -30,9 +31,9 @@
           img.alt = element
           div.append(img)
           
-          let h2 = document.createElement('h2')
-          h2.innerHTML = element
-          a.append(h2)
+          // let h2 = document.createElement('h2')
+          // h2.innerHTML = element.split('.')[0]
+          // a.append(h2)
 
           main.append(a);           
         });

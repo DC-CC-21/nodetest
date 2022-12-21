@@ -1,21 +1,18 @@
 {
-    "Beach":[
-        "Beach1.jpg",
-        "Beach2.jpg"
-    ],
-    "Foods":[
-        "Foods1.jpg",
-        "Foods2.jpg"
-    ],
-    "Forests":[
-        "Forests1.jpg"
-    ],
-    "Islands":[
-        "Lighthouse.jpg",
-        "Surfboard.jpg",
-        "Wavve.jpg"
-    ],
-    "Mountains":[
-        
-    ]
+  "Beach": ["Beach1.jpg", "Beach2.jpg"],
+  "Foods": ["Foods1.jpg", "Foods2.jpg"],
+  "Forests": ["Forests1.jpg"],
+  "Islands": ["Lighthouse.jpg", "Surfboard.jpg", "Wave.jpg"],
+  "Mountains": [],
+  "Plants": ["Plants1.jpg", "Plants2.jpg", "Plants3.jpg", "Plants4.jpg"],
+  "Underwater": [],
+  "Waterfalls": [
+    "Waterfalls1.jpg",
+    "Waterfalls2.jpg",
+    "Waterfalls3.jpg",
+    "Waterfalls4.jpg",
+    "Waterfalls5.jpg",
+    "Waterfalls6.jpg"
+  ],
+  "Wildlife": ["Wildlife1.jpg", "Wildlife2.jpg", "Wildlife3.jpg"]
 }

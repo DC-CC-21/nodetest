@@ -7,8 +7,10 @@
     <title><%= details.image %> Puzzle</title>
   </head>
   <body>
+    <a href="puzzleSelector?type=<%=details.type%>"><img src="./assets/BackButton.svg" alt="back" width="100px" height="100px" style="width:100px; height:100px;"></a>
+
     <p style="display: none" id="popup">Please choose a number of pieces.</p>
-    <img src="./assets/<%= details.type %>/<%= details.image %>" />
+    <img src="./assets/<%= details.type %>/<%= details.image %>" width="500px" height="500px" />
       <label
         >4<input type="checkbox" name="pieceCount" onclick="unclick(this)"
       /></label>
@@ -24,7 +26,7 @@
       <label
         >100<input type="checkbox" name="pieceCount" onclick="unclick(this)"
       /></label>
-      <p id="details"><%=details.type%>,<%=details.image%></p>
+      <p id="details" style="display:none;"><%=details.type%>,<%=details.image%></p>
       <!-- <a id='play' href="/play?type=<%=details.type%>&image=<%=details.image%>">PLAY</a> -->
         <a id='play' href="/play?type=<%=details.type%>&image=<%=details.image%>">PLAY</a>
       <!-- <button type="submit" id="play">Play</button> -->

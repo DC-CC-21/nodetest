@@ -4,34 +4,41 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Home Library for Puzzle App." />
+    <meta name="theme-color" content="#000000" />
     <title>Puzzle App Library: Home</title>
     <link rel="stylesheet" type="text/css" href="./css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="./css/small.css" />
-
-    <link
-      href=""
-      rel="stylesheet"
-    />
-    <link
-      href=""
-      rel="stylesheet"
-    />
+    <link href="" rel="stylesheet" />
+    <link href="" rel="stylesheet" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+    
+  </head>
   <body>
     <header>
       <h1>Puzzle Library: Home</h1>
     </header>
     <main>
-      <a href='#'>
+      <a href="#">
         <div>
-          <img src='./assets/homeImgs/resume.jpg' alt='Resume Img' width='300' height='233'>
+          <img
+            src="./assets/homeImgs/resume.jpg"
+            alt="Resume Img"
+            width="300"
+            height="233"
+          />
         </div>
         <h2>Resume</h2>
       </a>
-      
 
-      <a href='pieceSetup'>
+      <a href="pieceSetup">
         <div>
-          <img src='./assets/homeImgs/Camera.svg' alt='Camera Img' width='300' height='233'>
+          <img
+            src="./assets/homeImgs/Camera.svg"
+            alt="Camera Img"
+            width="300"
+            height="233"
+          />
         </div>
         <h2>Custom</h2>
       </a>
@@ -41,31 +48,35 @@
       <span id="lm"></span>
     </footer>
     <script>
-      let main = document.getElementsByTagName('main')[0]
-      fetch('./assets/puzzles.json') 
-      .then(response => response.json())
-      .then(jsObject => {
-        let before = main.firstChild
-        Object.keys(jsObject).forEach(element => {
-          let a = document.createElement('a')
-          a.href = 'puzzleSelector?type='+element
+      let main = document.getElementsByTagName("main")[0];
+      fetch("./assets/puzzles.json")
+        .then((response) => response.json())
+        .then((jsObject) => {
+          let before = main.firstChild;
+          Object.keys(jsObject).forEach((element) => {
+            let a = document.createElement("a");
+            a.href = "puzzleSelector?type=" + element;
 
-          let div = document.createElement('div')
-          a.append(div)
+            let div = document.createElement("div");
+            a.append(div);
 
-          let img = document.createElement('img')
-          img.src = './assets/'+element+'/'+jsObject[element][0]
-          img.alt = element
-          div.append(img)
-          
-          let h2 = document.createElement('h2')
-          h2.innerHTML = element
-          a.append(h2)
+            let img = document.createElement("img");
+            img.src = "./assets/" + element + "/" + jsObject[element][0];
+            img.alt = element;
+            div.append(img);
 
-          main.insertBefore(a, before);           
+            let h2 = document.createElement("h2");
+            h2.innerHTML = element;
+            a.append(h2);
+
+            main.insertBefore(a, before);
+          });
         });
-        }) 
-
+        window.addEventListener("load", () => {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("service-worker.js");
+        }
+      })
     </script>
   </body>
 </html>
