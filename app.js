@@ -26,7 +26,7 @@ app.use(express.static(__dirname+"/public"));
 // app get main index file
 app.get("/", function (req, res) {
   // index for filename and null for data sent out
-  res.render('index', null)
+  res.render('puzzleHome', null)
 });
 
 // new page --- currently not active
@@ -35,6 +35,15 @@ app.get("/newpage", displayResults)
 // puzzle home
 app.get("/puzzleHome", (req, res) => {
   res.render('puzzleHome', null)
+})
+
+app.get('/customPuzzle', (req, res) => {
+  res.render('customPuzzle', null)
+})
+
+app.get('/login', (req, res) => {
+  let query = url.parse(req.url, true).query
+  res.render('login', {type:query.type})
 })
 
 // code for puzzleselector.ejs
@@ -77,7 +86,25 @@ async function displayResults(req, res){
   })
 };
 
-app.post("/", testBase);
+app.post("/puzzleHome", Sign_in)
+async function Sign_in(req, res){
+    let user = req.body.user
+    let email = req.body.email
+    let password = req.body.password
+    localStorage.setItem('user', user)
+    console.log(user,email,password)
+    await base
+    .insertOne({
+      user: user,
+      email: email,
+      password: password,
+    })
+    .then(() => {
+      res.status(201)
+      res.render('puzzleHome', null)
+    });
+
+};
 
 app.listen(PORT, function () {
   console.log(`server is running on port ${PORT}`);

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="./css/small.css" />
+  </head>
+  <body>
+    <header>
+      <% switch(type) { case 'create' : %> Create Account <% break; default: %>Sign in<% } %>
+    </header>
+    <main>
+      <form action="/puzzleHome" method="post">
+        <label
+          >*Username:
+          <input
+          name="user"
+            type="text"
+            minlength="5"
+            maxlength="20"
+            pattern="[A-Za-z]+"
+            required="true"
+        /></label>
+        <label
+        >*Email:
+        <input
+        name="email"
+          type="email"
+          required="true"
+      /></label>
+      <label
+      >*Password:
+      <input
+      name="password"
+        type="password"
+        minlength="5"
+        maxlength="20"
+        pattern="[A-Za-z]+"
+        required="true"
+    /></label>
+        <button type="submit">Sign in</button>
+      </form>
+      <p>Don't have an account? <a href="login?type=create">Sign up</a></p>
+    </main>
+    <footer>
+      <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
+      <span id="lm"></span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="./css/small.css" />
+
+    <title>Custom Puzzle</title>
+  </head>
+  <body>
+    <header>
+      <a href="puzzleHome"
+        ><img
+          src="./assets/BackButton.svg"
+          alt="back"
+          width="100px"
+          height="100px"
+      /></a>
+      <h1 id="pieceH1">Piece Selection</h1>
+
+    </header>
+    <main id="pieceSel">
+      <p style="display: none" id="popup">Please choose a number of pieces.</p>
+      <label
+        >Choose Photo:
+        <input
+          type="file"
+          accept="image/jpg, image/png, image/jpeg"
+      /></label>
+      <img id="image" src="./assets/ww.jpg" width="500px" height="500px" />
+      <div class="pieceCt">
+        <label
+          >4<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+        <label
+          >25<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+        <label
+          >36<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+        <label
+          >64<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+        <label
+          >100<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+        /></label>
+      </div>
+
+      <a id="play" href="play?type=custom&image=null&grid=0">PLAY</a>
+    </main>
+    <footer>
+      <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
+      <span id="lm"></span>
+    </footer>
+    <script>
+      let boxes = document.getElementsByName("pieceCount");
+      let a = document.getElementById("play");
+      function unclick(currentBox) {
+        boxes.forEach((box) => {
+          box.checked = false;
+        });
+        currentBox.checked = true;
+        let grid = currentBox.parentElement.innerHTML.split("<")[0];
+        a.href = `/play?type=custom&image=null&grid=${grid}`;
+      }
+      document.querySelector('input[type="file"]')
+        .addEventListener("change", function () {
+          console.log('loading...')
+          if (this.files && this.files[0]) {
+            let path = URL.createObjectURL(this.files[0]);
+            document.getElementById("image").src = URL.createObjectURL(
+              this.files[0]
+            );
+          }
+        });
+      document.getElementById("play").addEventListener("click", (e) => {
+        let boxIsChecked = false;
+        boxes.forEach((box) => {
+          if (box.checked) {
+            boxIsChecked = true;
+          }
+        });
+        if (!boxIsChecked) {
+          e.preventDefault();
+          document.getElementById("popup").style.display = "block";
+          return;
+        }
+      });
+    </script>
+  </body>
+</html>
