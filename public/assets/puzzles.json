@@ -18,7 +18,8 @@
     "Forests3Sq.jpg",
     "Forests4Sq.jpg",
     "Forests5Sq.jpg",
-    "Forests6Sq.jpg"
+    "Forests6Sq.jpg",
+    "Forests7Sq.jpg"
   ],
   "Islands": ["LighthouseSq.jpg", "SurfboardSq.jpg", "WaveSq.jpg"],
   "Mountains": [
@@ -40,6 +41,16 @@
     "Plants4Sq.jpg",
     "Plants5Sq.jpg"
   ],
+  "Space": [
+    "Space1Sq.jpg",
+    "Space2Sq.jpg",
+    "Space3Sq.jpg",
+    "Space4Sq.jpg",
+    "Space5Sq.jpg",
+    "Space6Sq.jpg",
+    "Space7Sq.jpg",
+    "Space8Sq.jpg"
+  ],
   "Waterfalls": [
     "Waterfalls1Sq.jpg",
     "Waterfalls2Sq.jpg",
@@ -47,6 +58,18 @@
     "Waterfalls4Sq.jpg",
     "Waterfalls5Sq.jpg",
     "Waterfalls6Sq.jpg"
+  ],
+  "Weather": [
+    "Weather1Sq.jpg",
+    "Weather2Sq.jpg",
+    "Weather3Sq.jpg",
+    "Weather4Sq.jpg",
+    "Weather5Sq.jpg",
+    "Weather6Sq.jpg",
+    "Weather7Sq.jpg",
+    "Weather8Sq.jpg",
+    "Weather9Sq.jpg",
+    "Weather10Sq.jpg"
   ],
   "Wildlife": [
     "Wildlife1Sq.jpg",
