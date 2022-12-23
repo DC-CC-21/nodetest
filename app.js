@@ -36,6 +36,10 @@ app.get("/puzzleHome", homePage);
 
 async function homePage(req, res) {
   let user_id = parseCookies(req);
+  if(typeof user_id.user_id == 'undefined'){
+    res.render("puzzleHome", null);
+    return
+  }
   console.log(ObjectId(user_id.user_id.replace(/j:"|"/g, "")));
   await base
     .findOne({ _id: ObjectId(user_id.user_id.replace(/j:"|"/g, "")) })
