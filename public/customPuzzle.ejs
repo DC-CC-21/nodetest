@@ -22,30 +22,42 @@
     </header>
     <main id="pieceSel">
       <p style="display: none" id="popup">Please choose a number of pieces.</p>
-      <label id="custom"
-        >Choose Photo:
-        <input type="file" accept="image/jpg, image/png, image/jpeg"
-      /></label>
-      <img id="image" src="./assets/ww.jpg" width="500px" height="500px" />
-      <div class="pieceCt">
-        <label
-          >4<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-        /></label>
-        <label
-          >25<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-        /></label>
-        <label
-          >36<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-        /></label>
-        <label
-          >64<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-        /></label>
-        <label
-          >100<input type="checkbox" name="pieceCount" onclick="unclick(this)"
-        /></label>
-      </div>
 
-      <a id="play" href="play?type=custom&image=null&grid=0">PLAY</a>
+      <form method="post" action="/play" enctype="multipart/form-data">
+        <label id="custom"
+          ><span id="customText">Choose Photo:</span>
+          <input
+            type="file"
+            accept="image/jpg, image/png, image/jpeg"
+            name="file"
+            required
+        /></label>
+        <img id="image" src="#" width="500px" height="500px"  />
+        <div class="pieceCt">
+          <label
+            >4<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+          /></label>
+          <label
+            >25<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+          /></label>
+          <label
+            >36<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+          /></label>
+          <label
+            >64<input type="checkbox" name="pieceCount" onclick="unclick(this)"
+          /></label>
+          <label
+            >100<input
+              type="checkbox"
+              name="pieceCount"
+              onclick="unclick(this)"
+          /></label>
+          <label><input name="binaryFile" type="hidden" /></label>
+          <label><input name="gridsize" type="hidden" /></label>
+        </div>
+        <button type="submit" id="play">PLAY</button>
+        <!-- <a id="play" href="play?type=custom&image=null&grid=0">PLAY</a> -->
+      </form>
     </main>
     <footer>
       <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
@@ -60,6 +72,7 @@
         });
         currentBox.checked = true;
         let grid = currentBox.parentElement.innerHTML.split("<")[0];
+        document.getElementsByName("gridsize")[0].value = grid;
         a.href = `/play?type=custom&image=null&grid=${grid}`;
       }
       document
@@ -86,6 +99,22 @@
           return;
         }
       });
+      function uploadFile(inputElement) {
+        document.getElementById('customText').innerHTML = 'Loading you image...'
+        var file = inputElement.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+          /******************* for Binary ***********************/
+          var data = reader.result.split(",")[1];
+          var binaryBlob = atob(data);
+          // var img = document.createElement("img");
+          // img.src = "data:image/jpeg;base64," + btoa(binaryBlob);
+          // document.body.appendChild(img);
+          document.getElementsByName("binaryFile")[0].value = binaryBlob;
+          document.getElementById('customText').innerHTML = 'Image upload successful'
+        };
+        reader.readAsDataURL(file);
+      }
     </script>
   </body>
 </html>

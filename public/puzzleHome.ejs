@@ -16,7 +16,10 @@
   <body>
     <header id="home">
       <h1>Puzzled</h1>
-      <a href="login?type=Sign in" class="login">Login</a>
+      <a href="login?type=Sign in" class="login">
+        <% if(typeof user == 'undefined'){ %> Login <% } else{ %> Welcome <%=
+        user.name %> <% } %>
+      </a>
     </header>
     <main>
       <a href="#">
@@ -42,12 +45,21 @@
         </div>
         <h2>Custom</h2>
       </a>
+      <p id="details">
+        <% if(typeof user == 'undefined'){ %> null <% } else{ %><%=
+          JSON.stringify(user) %> <% } %>
+      </p>
     </main>
     <footer>
       <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
       <span id="lm"></span>
     </footer>
+
     <script>
+      let userdata = JSON.parse(document.getElementById("details").innerHTML);
+      if(userdata){
+        localStorage.setItem("user_id", userdata.id);
+      }
       let main = document.getElementsByTagName("main")[0];
       fetch("./assets/puzzles.json")
         .then((response) => response.json())

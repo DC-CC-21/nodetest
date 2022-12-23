@@ -120,8 +120,13 @@ const puzzleImage = new Image();
 let imageURL = document.getElementById('details').innerHTML.split(',')
 
 let grid = ~~Math.sqrt(Number(imageURL[2]));
-console.log(imageURL[0])
-puzzleImage.src = `./assets/${imageURL[0]}/${imageURL[1]}`
+console.log(imageURL)
+if(imageURL[0] == "custom"){
+  puzzleImage.src = document.getElementById('exImage').src
+}
+else {
+  puzzleImage.src = `./assets/${imageURL[0]}/${imageURL[1]}`
+}
 // puzzleImage.src = "./assets/Waterfalls/Waterfalls1.jpg";
 const testing = false;
 
