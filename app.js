@@ -125,7 +125,7 @@ async function Sign_in(req, res) {
     password: password,
   };
   await base.find({email:email}).toArray().then(userdata => {
-    if(userdata) {
+    if(userdata.length) {
       res.status(201);
       console.log(userdata)
       res.render("puzzleHome", { user: { id: userdata[0]._id, name: userdata[0].user } });
