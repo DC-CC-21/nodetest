@@ -71,9 +71,9 @@ nav img {
     top: 0;
     width: 100%;
   }
-  header:not(#home) {
+  header {
     display: grid;
-    grid-template-columns: 75px 1fr 75px;
+    grid-template-columns: 1fr 2fr 1fr;
   }
   header a img {
     border: none;
@@ -121,5 +121,50 @@ nav img {
     margin: 1em auto;
     border-radius: 10px;
     box-shadow: 0 0 7px 7px black, 0 0 5px 5px inset #007a54;
+  }
+  .login {
+    color: white;
+    font-size: 20px;
+    padding-top: 1.2em;
+  }
+  h1 {
+    grid-column: 2 / 3;
+  }
+  form.account {
+    background-color: black;
+    color: #f8f6f1;
+    border: 5px solid #ff0a74;
+    border-radius: 20px;
+    /* box-shadow: 0 0 5px 5px #ff0a74; */
+    padding: 2em;
+    grid-column: 2 / 3;
+  }
+  form.account label {
+    display: grid;
+    text-align: left;
+    margin: 1em;
+    font-size: 1.2em;
+  }
+  form.account input {
+    border-left: 5px solid #ff0a74;
+  }
+  form.account button {
+    background-color: white;
+    border: 3.5px solid #007a54;
+    padding: 0.5em 1em;
+    margin-top: 1em;
+  }
+  #noAccount {
+    grid-column: 2 / 3;
+    font-size: 1.1em;
+    margin: 1em;
+  }
+  #noAccount a {
+    text-decoration: underline;
+    color: #ff0a74;
+  }
+  #custom {
+    text-align: left;
+    margin: 1em 25% 2em;
   }
 }
