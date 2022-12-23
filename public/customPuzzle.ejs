@@ -19,15 +19,12 @@
           height="100px"
       /></a>
       <h1 id="pieceH1">Piece Selection</h1>
-
     </header>
     <main id="pieceSel">
       <p style="display: none" id="popup">Please choose a number of pieces.</p>
-      <label
+      <label id="custom"
         >Choose Photo:
-        <input
-          type="file"
-          accept="image/jpg, image/png, image/jpeg"
+        <input type="file" accept="image/jpg, image/png, image/jpeg"
       /></label>
       <img id="image" src="./assets/ww.jpg" width="500px" height="500px" />
       <div class="pieceCt">
@@ -65,9 +62,10 @@
         let grid = currentBox.parentElement.innerHTML.split("<")[0];
         a.href = `/play?type=custom&image=null&grid=${grid}`;
       }
-      document.querySelector('input[type="file"]')
+      document
+        .querySelector('input[type="file"]')
         .addEventListener("change", function () {
-          console.log('loading...')
+          console.log("loading...");
           if (this.files && this.files[0]) {
             let path = URL.createObjectURL(this.files[0]);
             document.getElementById("image").src = URL.createObjectURL(

@@ -4,46 +4,58 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Document</title>
+
     <link rel="stylesheet" type="text/css" href="./css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="./css/small.css" />
   </head>
   <body>
     <header>
-      <% switch(type) { case 'create' : %> Create Account <% break; default: %>Sign in<% } %>
+      <a href="puzzleHome"
+        ><img
+          src="./assets/BackButton.svg"
+          alt="back"
+          width="100px"
+          height="100px"
+      /></a>
+      <h1>Puzzled: Account</h1>
     </header>
     <main>
-      <form action="/puzzleHome" method="post">
+      <form action="/puzzleHome" method="post" class="account">
+        <h2>
+          <% switch(type) { case 'create' : %> Create Account <% break; default:
+          %>Login<% } %>
+        </h2>
         <label
           >*Username:
           <input
-          name="user"
+            name="user"
             type="text"
             minlength="5"
-            maxlength="20"
+            maxlength="30"
             pattern="[A-Za-z]+"
             required="true"
         /></label>
         <label
-        >*Email:
-        <input
-        name="email"
-          type="email"
-          required="true"
-      /></label>
-      <label
-      >*Password:
-      <input
-      name="password"
-        type="password"
-        minlength="5"
-        maxlength="20"
-        pattern="[A-Za-z]+"
-        required="true"
-    /></label>
-        <button type="submit">Sign in</button>
+          >*Email: <input name="email" type="email" required="true"
+        /></label>
+        <label
+          >*Password:
+          <input
+            name="password"
+            type="password"
+            minlength="5"
+            maxlength="50"
+            pattern="[A-Za-z]+"
+            required="true"
+        /></label>
+        <button type="submit">Login</button>
       </form>
-      <p>Don't have an account? <a href="login?type=create">Sign up</a></p>
+      <p id="noAccount">
+        Don't have an account?
+        <a href="login?type=create"><strong>Sign up</strong></a>
+      </p>
     </main>
     <footer>
       <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
