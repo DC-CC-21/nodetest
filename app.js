@@ -91,15 +91,16 @@ async function Sign_in(req, res){
     let user = req.body.user
     let email = req.body.email
     let password = req.body.password
-    localStorage.setItem('user', user)
     console.log(user,email,password)
-    await base
-    .insertOne({
+    let data = {
       user: user,
       email: email,
       password: password,
-    })
+    }
+    await base
+    .insertOne(data)
     .then(() => {
+      console.log(data._id)
       res.status(201)
       res.render('puzzleHome', null)
     });
