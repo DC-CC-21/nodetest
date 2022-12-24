@@ -110,9 +110,6 @@ function constrain(aNumber, aMin, aMax) {
 function random(min, max) {
   return Math.random() * (max - min) + min;
 }
-function hexToBase64(str) {
-  return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
-}
 
 //draw background
 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -121,19 +118,16 @@ ctx.fillStyle = "#f00";
 // ctx.translate(50, 50);
 const minimap = document.getElementById('map')
 const puzzleImage = new Image();
-let imageURL = document.getElementById('details').innerHTML.split(',')
+let imageURL = document.getElementById('details').innerHTML.split('|||')
 
 let grid = ~~Math.sqrt(Number(imageURL[2]));
 // console.log(imageURL)
 if(imageURL[0] == "custom"){
-  var img = new Image();
-  img.src = imageURL[1]
-  document.getElementById('banner').appendChild(img);
-  puzzleImage.src = 'data:image/jpeg;base64,' + hexToBase64(document.getElementById('exImage').src)//btoa(imageURL[0]);
-  // puzzleImage.src = document.getElementById('exImage').src
+  puzzleImage.src = document.getElementById('exImage').src
 }
 else {
   puzzleImage.src = `./assets/${imageURL[0]}/${imageURL[1]}`
+  document.getElementById('exImage').src = puzzleImage.src
 }
 // puzzleImage.src = "./assets/Waterfalls/Waterfalls1.jpg";
 const testing = false;

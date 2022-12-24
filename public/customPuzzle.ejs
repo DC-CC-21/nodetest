@@ -32,7 +32,8 @@
             name="file"
             required
         /></label>
-        <img id="image" src="#" width="500px" height="500px"  />
+        <img id="image" src="#" width="500px" height="500px" />
+        <!-- <canvas id="image" width="500px" height="500px"></canvas> -->
         <div class="pieceCt">
           <label
             >4<input type="checkbox" name="pieceCount" onclick="unclick(this)"
@@ -52,7 +53,7 @@
               name="pieceCount"
               onclick="unclick(this)"
           /></label>
-          <label><input name="binaryFile" type="hidden" /></label>
+          <label><input name="binaryFile"  /></label>
           <label><input name="gridsize" type="hidden" /></label>
         </div>
         <button type="submit" id="play">PLAY</button>
@@ -84,6 +85,7 @@
             document.getElementById("image").src = URL.createObjectURL(
               this.files[0]
             );
+            uploadFile(document.getElementById('image'))
           }
         });
       document.getElementById("play").addEventListener("click", (e) => {
@@ -99,22 +101,49 @@
           return;
         }
       });
-      function uploadFile(inputElement) {
-        document.getElementById('customText').innerHTML = 'Loading you image...'
-        var file = inputElement.files[0];
-        var reader = new FileReader();
-        reader.onloadend = function () {
-          /******************* for Binary ***********************/
-          var data = reader.result.split(",")[1];
-          var binaryBlob = atob(data);
-          // var img = document.createElement("img");
-          // img.src = "data:image/jpeg;base64," + btoa(binaryBlob);
-          // document.body.appendChild(img);
-          document.getElementsByName("binaryFile")[0].value = binaryBlob;
-          document.getElementById('customText').innerHTML = 'Image upload successful'
-        };
-        reader.readAsDataURL(file);
+      // function uploadFile(inputElement) {
+      //   document.getElementById('customText').innerHTML = 'Loading your image...'
+      //   var file = inputElement.files[0];
+      //   var reader = new FileReader();
+      //   reader.onloadend = function () {
+      //     /******************* for Binary ***********************/
+      //     var data = reader.result.split(",")[1];
+      //     var binaryBlob = atob(data);
+      //     // var img = document.createElement("img");
+      //     // img.src = "data:image/jpeg;base64," + btoa(binaryBlob);
+      //     // document.body.appendChild(img);
+      //     document.getElementsByName("binaryFile")[0].value = binaryBlob;
+      //     document.getElementById('customText').innerHTML = 'Image upload successful'
+      //   };
+      //   reader.readAsDataURL(file);
+      // }
+      function uploadFile(image) {
+        var img = document.getElementById('image')
+        console.log(img)
+        // Create an empty canvas element
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        // Copy the image contents to the canvas
+        var ctx = canvas.getContext("2d");
+        let drawImg = new Image()
+        drawImg.onload = function(){
+          ctx.drawImage(drawImg, 0, 0);
+          var dataURL = canvas.toDataURL("image/png");
+          document.getElementsByName("binaryFile")[0].value = dataURL
+        }
+        drawImg.src = img.src
+        // Get the data-URL formatted image
+        // Firefox supports PNG and JPEG. You could check img.src to guess the
+        // original format, but be aware the using "image/jpg" will re-encode the image.
+
+        // return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
       }
+      //canvas
+      // const canvas = document.getElementById('image')
+      // const ctx = canvas.getContext('2d')
+      // ctx.fillStyle = '#00a'
+      // ctx.fillRect(0,0,canvas.width, canvas.height)
     </script>
   </body>
 </html>
