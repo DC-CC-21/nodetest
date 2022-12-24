@@ -14,7 +14,7 @@ const PORT = 4001;
 const url = require("url");
 
 const multer = require('multer')
-const upload = multer({dest:'uploads/',   limits: { fieldSize: 25 * 1024 * 1024 }})
+const upload = multer({limits: { fieldSize: 25 * 1024 * 1024 }})
 // New app using express module
 const app = express();
 app.set("view engine", "ejs");
@@ -44,7 +44,7 @@ async function homePage(req, res) {
   await base
     .findOne({ _id: ObjectId(user_id.user_id.replace(/j:"|"/g, "")) })
     .then((userdata) => {
-      console.log(userdata);
+      // console.log(userdata);
       res.render("puzzleHome", { user: {name:userdata.user} });
     });
 }
@@ -92,9 +92,9 @@ async function postCustomPuzzle(req, res) {
   let user_id = parseCookies(req);
   console.log(ObjectId(user_id.user_id.replace(/j:"|"/g, "")));
   await base
-    .updateOne({ _id: ObjectId(user_id.user_id.replace(/j:"|"/g, "")) }, {$set:{customFile:{gridSize:req.body.gridsize, binaryFile: req.file}}})
-    .then((userdata) => {
-      res.render('play', {details:{type:'custom', grid:req.body.gridsize, image:req.file.path}})
+    .updateOne({ _id: ObjectId(user_id.user_id.replace(/j:"|"/g, "")) }, {$set:{customFile:{gridSize:req.body.gridsize, binaryFile: req.file}}})    .then((userdata) => {
+      // console.log(new Buffer.from(req.file.buffer, 'binary'))
+      res.render('play', {details:{type:'custom', grid:req.body.gridsize, image:(req.file.buffer)}})
     });
   // console.log(req.file)
   // console.log(req.body.gridsize)
@@ -118,6 +118,8 @@ async function Sign_in(req, res) {
   let user = req.body.user;
   let email = req.body.email;
   let password = req.body.password;
+  let type = req.body.type.replace(' ', '')
+  console.log(type)
   console.log(user, email, password);
   let data = {
     user: user,
@@ -126,19 +128,40 @@ async function Sign_in(req, res) {
   };
   await base.find({email:email}).toArray().then(userdata => {
     if(userdata.length) {
-      res.status(201);
-      console.log(userdata)
-      res.render("puzzleHome", { user: { id: userdata[0]._id, name: userdata[0].user } });
-      return false;
-    };
-    base.insertOne(data).then(() => {
-      console.log(data._id);
-      res.status(201);
-      res.cookie("user_id", data._id);
-      res.render("puzzleHome", { user: { id: data._id, name: user } });
-    });
-  
-  });
+      // console.log(`${type},create`)
+      if(type === 'create'){
+        //works
+        console.log('create account with registered email')
+        res.render('login', {type:type, msg:'Email is already registered.'})  
+        return;
+      } else {
+        if(user == userdata[0].user && email == userdata[0].email && password == userdata[0].password){
+          //works
+          console.log('logged into account correctly')
+          res.cookie("user_id", userdata[0]._id);
+          res.render("puzzleHome", { user: { id: userdata[0]._id, name: userdata[0].user } });
+          return;
+
+        } else {
+          console.log('failed to login')
+          //tested and works
+          res.render('login', {type:'login', msg:'Username, Email, or Password is incorrect.', data:{user:user, email:email, password:password}})
+          return;
+        }
+      }
+    } else if (type == 'create'){
+      console.log('creating an account')
+      base.insertOne(data).then(() => {
+        console.log(data._id);
+        res.status(201);
+        res.cookie("user_id", data._id);
+        res.render("puzzleHome", { user: { id: data._id, name: user } });
+      });
+    } else{
+      //tested and works
+      res.render('login', {type:type, msg:'There is no account registered with this email.'})
+    }
+});
 
 }
 function parseCookies(request) {

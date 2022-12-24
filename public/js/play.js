@@ -110,6 +110,10 @@ function constrain(aNumber, aMin, aMax) {
 function random(min, max) {
   return Math.random() * (max - min) + min;
 }
+function hexToBase64(str) {
+  return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+}
+
 //draw background
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -120,9 +124,13 @@ const puzzleImage = new Image();
 let imageURL = document.getElementById('details').innerHTML.split(',')
 
 let grid = ~~Math.sqrt(Number(imageURL[2]));
-console.log(imageURL)
+// console.log(imageURL)
 if(imageURL[0] == "custom"){
-  puzzleImage.src = document.getElementById('exImage').src
+  var img = new Image();
+  img.src = imageURL[1]
+  document.getElementById('banner').appendChild(img);
+  puzzleImage.src = 'data:image/jpeg;base64,' + hexToBase64(document.getElementById('exImage').src)//btoa(imageURL[0]);
+  // puzzleImage.src = document.getElementById('exImage').src
 }
 else {
   puzzleImage.src = `./assets/${imageURL[0]}/${imageURL[1]}`

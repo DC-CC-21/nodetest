@@ -27,6 +27,7 @@
           <% switch(type) { case 'create' : %> Create Account <% break; default:
           %>Login<% } %>
         </h2>
+        <% if(typeof msg != 'undefined') {%> <p><%=msg%></p> <% } %> 
         <label
           >*Username:
           <input
@@ -36,9 +37,11 @@
             maxlength="30"
             pattern="[A-Za-z]+"
             required="true"
+            <% if(typeof data != 'undefined') {%> value=<%=data.user%><% } %> 
         /></label>
         <label
-          >*Email: <input name="email" type="email" required="true"
+          >*Email: <input name="email" type="email" required="true" <% if(typeof data != 'undefined') {%> value=<%=data.email%><% } %> 
+
         /></label>
         <label
           >*Password:
@@ -49,13 +52,22 @@
             maxlength="50"
             pattern="[A-Za-z]+"
             required="true"
+            <% if(typeof data != 'undefined') {%> value=<%=data.password%><% } %> 
         /></label>
+        <input type="hidden" name="type" value="<%= type %> ">
         <button type="submit">Login</button>
       </form>
-      <p id="noAccount">
-        Don't have an account?
-        <a href="login?type=create"><strong>Sign up</strong></a>
-      </p>
+      <% if(type == 'create'){ %>
+        <p id="noAccount">
+           Already have an account?
+            <a href="login?type=create"><strong>Login</strong></a>
+          </p>      
+        <% } else{ %>
+        <p id="noAccount">
+            Don't have an account?
+            <a href="login?type=create"><strong>Sign up</strong></a>
+          </p>      
+        <% } %> 
     </main>
     <footer>
       <p>&copy; 2022 || DC-CC-21 & Tauriel1202 || .:|:.</p>
