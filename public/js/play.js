@@ -116,18 +116,19 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 ctx.fillStyle = "#f00";
 // ctx.translate(50, 50);
-const minimap = document.getElementById('map')
+const minimap = document.getElementById("map");
 const puzzleImage = new Image();
-let imageURL = document.getElementById('details').innerHTML.split('|||')
+let imageURL = document.getElementById("details").innerHTML.split("|||");
+imageURL[3] = JSON.parse(imageURL[3]);
 
 let grid = ~~Math.sqrt(Number(imageURL[2]));
-// console.log(imageURL)
-if(imageURL[0] == "custom"){
-  puzzleImage.src = document.getElementById('exImage').src
-}
-else {
-  puzzleImage.src = `./assets/${imageURL[0]}/${imageURL[1]}`
-  document.getElementById('exImage').src = puzzleImage.src
+
+console.log(imageURL);
+if (imageURL[0] == "custom") {
+  puzzleImage.src = document.getElementById("exImage").src;
+} else {
+  puzzleImage.src = `./assets/${imageURL[0]}/${imageURL[1]}`;
+  document.getElementById("exImage").src = puzzleImage.src;
 }
 // puzzleImage.src = "./assets/Waterfalls/Waterfalls1.jpg";
 const testing = false;
@@ -160,7 +161,8 @@ let piecePadding = 0;
 const edgesOnly = document.getElementById("check");
 
 puzzleImage.onload = function () {
-  document.getElementById('minimap').style.backgroundImage = 'url('+puzzleImage.src+')'
+  document.getElementById("minimap").style.backgroundImage =
+    "url(" + puzzleImage.src + ")";
   pieces.forEach((piece) => piece.createImage(ctx2));
   draw();
 };
@@ -228,8 +230,8 @@ class Piece {
       puzzleImage,
       -this.width * this.idxs[0],
       -this.height * this.idxs[1],
-      size*grid,
-      size*grid
+      size * grid,
+      size * grid
     );
     ctx.restore();
 
@@ -239,26 +241,36 @@ class Piece {
     image.onload = function () {
       p.image = image;
       if (!testing) {
-        p.x =
-          Math.random() > 0.5
-            ? constrain(
-                Math.random() * offset.x,
-                piecePadding,
-                offset.x - p.width
-              )
-            : constrain(
-                Math.random() * offset.x,
-                piecePadding,
-                offset.x - p.width
-              ) +
-              offset.x +
-              size * grid;
+        if (imageURL[3]) {
+          let idx = p.idxs[1] + p.idxs[0] * grid;
+          // console.log("testing", p.idxs);
+          // console.log("testing", p.idxs[0] + p.idxs[1] * grid);
+          p.x = imageURL[3][idx].position.x;
+          p.y = imageURL[3][idx].position.y;
+          p.rotation = imageURL[3][idx].rotation;
+          p.currentRotation = imageURL[3][idx].rotation;
+        } else {
+          p.x =
+            Math.random() > 0.5
+              ? constrain(
+                  Math.random() * offset.x,
+                  piecePadding,
+                  offset.x - p.width
+                )
+              : constrain(
+                  Math.random() * offset.x,
+                  piecePadding,
+                  offset.x - p.width
+                ) +
+                offset.x +
+                size * grid;
 
-        p.y = constrain(
-          Math.random() * canvas.height,
-          piecePadding,
-          canvas.height - p.height - piecePadding
-        );
+          p.y = constrain(
+            Math.random() * canvas.height,
+            piecePadding,
+            canvas.height - p.height - piecePadding
+          );
+        }
       }
     };
   }
@@ -410,23 +422,23 @@ for (let i = 0; i < grid; i++) {
 }
 
 var lastLoop = new Date();
-function gameLoop() { 
-    var thisLoop = new Date();
-    var fps = 1000 / (thisLoop - lastLoop);
-    lastLoop = thisLoop;
-    return fps
+function gameLoop() {
+  var thisLoop = new Date();
+  var fps = 1000 / (thisLoop - lastLoop);
+  lastLoop = thisLoop;
+  return fps;
 }
 function draw() {
-  let frames = gameLoop()
+  let frames = gameLoop();
   frameCount += 0.01;
-  if(~~(frameCount*100) %10 == 0){
-    iosdebugger.innerHTML = frames.toFixed(0) + 'fps'
+  if (~~(frameCount * 100) % 10 == 0) {
+    iosdebugger.innerHTML = frames.toFixed(0) + "fps";
   }
   ctx.fillStyle = "#333";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  if(minimap.checked){
-    ctx.drawImage(puzzleImage, offset.x, offset.y, size*grid, size*grid)
+  if (minimap.checked) {
+    ctx.drawImage(puzzleImage, offset.x, offset.y, size * grid, size * grid);
     ctx.fillStyle = "#666a";
   } else {
     ctx.fillStyle = "#666";
@@ -435,12 +447,11 @@ function draw() {
   pieces.forEach((piece) => {
     if (piece.isEdge && edgesOnly.checked) {
       piece.draw(ctx);
-    } else if(!edgesOnly.checked) {
+    } else if (!edgesOnly.checked) {
       piece.draw(ctx);
     }
   });
-    requestAnimationFrame(draw);
-
+  requestAnimationFrame(draw);
 }
 
 const iosdebugger = document.getElementById("debugger");
@@ -459,7 +470,9 @@ function clickPiece(x, y) {
   x *= quality;
   y *= quality;
   for (let i = pieces.length - 1; i >= 0; i--) {
-    if(!pieces[i].isEdge && edgesOnly.checked){continue;}
+    if (!pieces[i].isEdge && edgesOnly.checked) {
+      continue;
+    }
     if (pieces[i].isin(x, y)) {
       pieces.splice(pieces.length - 1, 0, pieces.splice(i, 1)[0]);
       selectedPiece = pieces.length - 1;
@@ -469,7 +482,6 @@ function clickPiece(x, y) {
   }
 }
 function releasePiece() {
-
   if (typeof selectedPiece == "number") {
     pieces[selectedPiece].place();
     if (!dragging && !pieces[selectedPiece].placed) {
@@ -490,13 +502,11 @@ canvas.addEventListener("touchstart", (e) => {
   clickPiece(e.touches[0].clientX, e.touches[0].clientY);
 });
 canvas.addEventListener("touchend", (e) => {
-
   releasePiece();
   e.preventDefault();
   return false;
 });
 canvas.addEventListener("touchcancel", (e) => {
-
   releasePiece();
   e.preventDefault();
   return false;
@@ -511,10 +521,60 @@ canvas.addEventListener("mousedown", (e) => {
 canvas.addEventListener("mouseup", (e) => {
   releasePiece(e.clientX, e.clientY);
   e.preventDefault();
+
   return false;
 });
 
+document.getElementById('shuffle').addEventListener('click', (e) => {
+  pieces.forEach(p => {
+    if(!p.placed){
+      p.x =
+      Math.random() > 0.5
+        ? constrain(
+            Math.random() * offset.x,
+            piecePadding,
+            offset.x - p.width
+          )
+        : constrain(
+            Math.random() * offset.x,
+            piecePadding,
+            offset.x - p.width
+          ) +
+          offset.x +
+          size * grid;
 
+    p.y = constrain(
+      Math.random() * canvas.height,
+      piecePadding,
+      canvas.height - p.height - piecePadding
+    );
+    }
+  })
+})
+
+window.onbeforeunload = function (event) {
+  let puzzleData = [];
+  pieces.forEach((piece) => {
+    puzzleData.push({
+      position: { x: piece.x, y: piece.y },
+      rotation: piece.rotation,
+      canvasDimensions: {
+        width: canvas.width / quality,
+        height: canvas.height / quality,
+      },
+    });
+  });
+
+  const params = {
+    data: puzzleData,
+  };
+
+  const http = new XMLHttpRequest();
+  http.open("put", "/play");
+  http.setRequestHeader("Content-type", "application/json");
+  http.send(JSON.stringify(puzzleData)); // Make sure to stringify
+  // return ("you have unsaved changes. Are you sure you want to navigate away?")
+};
 // window.onresize = function () {
 //   setCanvasQuality(canvas, window.innerWidth, window.innerHeight);
 // };

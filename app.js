@@ -24,6 +24,7 @@ app.use(
     extended: true,
   })
 );
+app.use(bodyParser.json())
 app.use(express.static(__dirname + "/public"));
 app.use("/uploads", express.static("uploads"));
 // new page --- currently not active
@@ -88,14 +89,17 @@ app.get("/play", async (req, res) => {
   let query = url.parse(req.url, true).query;
   let user_id = parseCookies(req);
   if (query.type == "resume") {
-    console.log('resumed file')
-    await base.findOne({_id:ObjectId(user_id.user_id.replace(/j:"|"/g, ""))}).then(userdata => {
-      if(!{details:{...userdata.lastPlayed}}.details.grid){
-        res.render('recentlyPlayed',null)  
-      } else {
-        res.render('play', {details:{...userdata.lastPlayed}})
-      }
-    })
+    console.log("resumed file");
+    await base
+      .findOne({ _id: ObjectId(user_id.user_id.replace(/j:"|"/g, "")) })
+      .then((userdata) => {
+        if (!{ details: { ...userdata.lastPlayed } }.details.grid) {
+          res.render("recentlyPlayed", null);
+        } else {
+          // console.log(userdata.lastPlayed.pieceData)
+          res.render("play", { details: { ...userdata.lastPlayed, pieceData2:JSON.stringify(userdata.lastPlayed.pieceData)}});
+        }
+      });
   } else {
     console.log("normal play");
     await base
@@ -116,8 +120,42 @@ app.get("/play", async (req, res) => {
       });
   }
 });
+
+app.put("/play", async (req, res) => {
+  let query = url.parse(req.url, true).query;
+  let user_id = parseCookies(req);
+  console.log('pieceMoved')
+  // await base.findOneAndUpdate({_id: ObjectId(user_id.user_id.replace(/j:"|"/g, ""))},)
+  // console.log('pieceData', req.body.data)
+  // console.log('pieceData', req.body)
+  // console.log(ObjectId(user_id.user_id.replace(/j:"|"/g, "")) )
+  await base.find({ _id: ObjectId(user_id.user_id.replace(/j:"|"/g, "")) }).toArray().then(async (userdata) => {
+    // console.log(userdata)
+    await base
+    .updateOne(
+      { _id: ObjectId(user_id.user_id.replace(/j:"|"/g, "")) },
+      {
+        $set: {
+          lastPlayed: {
+            grid:userdata[0].lastPlayed.grid,
+            image:userdata[0].lastPlayed.image,
+            type:userdata[0].lastPlayed.type,
+            pieceData:(req.body)
+          },
+        },
+      }
+    )
+    .then((userdata) => {
+      res.sendStatus(200)
+      // res.render("play", { details: query });
+    });
+  })
+  
+});
 app.post("/play", upload.single("file"), postCustomPuzzle);
 async function postCustomPuzzle(req, res) {
+  // console.log(req.body)
+  // return
   let user_id = parseCookies(req);
   console.log(ObjectId(user_id.user_id.replace(/j:"|"/g, "")));
   // console.log(req.body.binaryFile)
