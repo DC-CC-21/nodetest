@@ -122,13 +122,13 @@
         console.log(img)
         // Create an empty canvas element
         var canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
+        canvas.width = 600;
+        canvas.height = 600;
         // Copy the image contents to the canvas
         var ctx = canvas.getContext("2d");
         let drawImg = new Image()
         drawImg.onload = function(){
-          ctx.drawImage(drawImg, 0, 0);
+          ctx.drawImage(drawImg, 0, 0, canvas.width, canvas.height);
           var dataURL = canvas.toDataURL("image/png");
           document.getElementsByName("binaryFile")[0].value = dataURL
         }
