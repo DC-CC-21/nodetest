@@ -119,8 +119,9 @@ ctx.fillStyle = "#f00";
 const minimap = document.getElementById("map");
 const puzzleImage = new Image();
 let imageURL = document.getElementById("details").innerHTML.split("|||");
-imageURL[3] = JSON.parse(imageURL[3]);
-
+if(imageURL[3]){
+  imageURL[3] = JSON.parse(imageURL[3]);
+}
 let grid = ~~Math.sqrt(Number(imageURL[2]));
 
 console.log(imageURL);
